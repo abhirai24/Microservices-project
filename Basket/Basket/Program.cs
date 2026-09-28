@@ -1,0 +1,57 @@
+using Basket.GrpcService;
+using Basket.Handlers;
+using Basket.Repository;
+using Discount.Grpc.Protos;
+using System.Reflection;
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+
+//Application Services
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+// add swagger service
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+// Register Mediator
+var assembly = new Assembly[]
+{
+    Assembly.GetExecutingAssembly(),
+    typeof(CreateShoppingCartCommandHandler).Assembly
+};
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetValue<string>("CacheSettings:ConnectionString");
+});
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+builder.Services.AddScoped<DiscountGrpcService>();
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
+    (cfg => cfg.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]);
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
