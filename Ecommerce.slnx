@@ -1,12 +1,15 @@
 <Solution>
   <Folder Name="/Services/" />
   <Folder Name="/Services/Basket/">
-    <Project Path="Basket/Basket/Basket.csproj" Id="266cf35b-677c-43f9-901c-7d9d08f8d257" />
+    <Project Path="../../../../../../OneDrive/Desktop/respos/Ecommerce/Basket/Basket/Basket.csproj" Id="266cf35b-677c-43f9-901c-7d9d08f8d257" />
   </Folder>
   <Folder Name="/Services/Catalogs/">
-    <Project Path="Services/Catalog/Catalog.csproj" />
+    <Project Path="../../../../../../OneDrive/Desktop/respos/Ecommerce/Services/Catalog/Catalog.csproj" />
   </Folder>
   <Folder Name="/Services/Discount/">
-    <Project Path="Services/Discount/Discount/Discount.csproj" Id="cc9dcea1-9f1e-49a7-a3e1-dfdaf15226f7" />
+    <Project Path="../../../../../../OneDrive/Desktop/respos/Ecommerce/Services/Discount/Discount/Discount.csproj" Id="cc9dcea1-9f1e-49a7-a3e1-dfdaf15226f7" />
+  </Folder>
+  <Folder Name="/Services/Ordering/">
+    <Project Path="../../../../../../OneDrive/Desktop/respos/Ecommerce/Services/Ordering/Ordering.csproj" Id="01655c15-9bda-464d-ac6c-aa78dbff17ef" />
   </Folder>
 </Solution>
