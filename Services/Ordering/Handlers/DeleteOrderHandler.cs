@@ -2,6 +2,8 @@
 using Ordering.Commands;
 using Ordering.Entities;
 using Ordering.Repositories;
+using Ordering.Exceptions;
+
 
 namespace Ordering.Handlers
 {

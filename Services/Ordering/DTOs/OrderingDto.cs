@@ -14,7 +14,7 @@
            string CardNumber,
            string Expiration,
            string Cvv,
-           int PaymentMethod
+           string PaymentMethod
        );
     public record OrderDto(
             int Id,
@@ -31,6 +31,6 @@
             string CardNumber,
             string Expiration,
             string Cvv,
-            int PaymentMethod
+            string PaymentMethod
         );
 }

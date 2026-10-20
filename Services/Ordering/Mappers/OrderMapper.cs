@@ -1,6 +1,12 @@
-﻿using Ordering.DTOs;
-using Ordering.Entities;
+﻿using EvenntBus.Messages.Events;
 using Ordering.Commands;
+using Ordering.DTOs;
+using Ordering.Entities;
+using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
+using Ordering.Constants;
+using Ordering.Extensions; 
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Ordering.Mappers
 {
@@ -9,7 +15,7 @@ namespace Ordering.Mappers
         public static OrderDto ToDto(this Order order) =>
             new(order.Id, order.UserName!, order.TotalPrice ?? 0, order.FirstName!, order.LastName!,
                 order.EmailAddress!, order.AddressLine!, order.Country!, order.State!, order.ZipCode!,
-                order.CardName!, order.CardNumber!, order.Expiration!, order.Cvv!, order.PaymentMethod ?? 0);
+                order.CardName!, order.CardNumber!, order.Expiration!, order.Cvv!, order.PaymentMethod ?? "");
 
         public static Order ToEntity(this CheckoutOrderCommand command)
         {
@@ -91,5 +97,59 @@ namespace Ordering.Mappers
             orderToUpdate.Cvv = request.Cvv;
             orderToUpdate.PaymentMethod = request.PaymentMethod;
         }
+
+        public static CheckoutOrderCommand ToCheckoutOrderCommand(this BasketCheckoutEvent message)
+        {
+            return new CheckoutOrderCommand
+            {
+                UserName = message.UserName!,
+                TotalPrice = message.TotalPrice ?? 0,
+                FirstName = message.FirstName!,
+                LastName = message.LastName!,
+                EmailAddress = message.EmailAddress!,
+                AddressLine = message.AddressLine!,
+                Country = message.Country!,
+                State = message.State!,
+                ZipCode = message.zipcode!,
+                CardName = message.CardName!,
+                CardNumber = message.CardNumber!,
+                Expiration = message.Expiration!,
+                Cvv = message.Cvv!,
+                PaymentMethod = message.PayementMethod! 
+            };
+        }
+
+        public static OutboxMessage ToOutBoxMessage(Order order)
+        {
+            var outboxMessage = new OutboxMessage
+            {
+                CorrelationId = Guid.NewGuid().ToString(),
+                Type = OutboxMessageTypes.OrderCreated,
+                OccurredOn = DateTime.UtcNow,
+                Content = JsonConvert.SerializeObject(new
+                {
+                    order.Id,
+                    order.UserName,
+                    order.TotalPrice,
+                    order.FirstName,
+                    order.LastName,
+                    order.AddressLine,
+                    order.Country,
+                    order.State,
+                    order.ZipCode,
+                    //PCI sensitive 
+                    order.CardName,
+                    order.CardNumber,
+                    order.Expiration,
+                    order.Cvv,
+                    order.PaymentMethod,
+                    order.OrderStatus
+                })
+
+            };
+            return outboxMessage;
+        }
+
+
     }
 }

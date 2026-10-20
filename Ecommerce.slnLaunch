@@ -1,0 +1,27 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Basket\\Basket\\Basket.csproj",
+        "Action": "Start",
+        "DebugTarget": "Basket"
+      },
+      {
+        "Path": "Services\\Catalog\\Catalog.csproj",
+        "Action": "Start",
+        "DebugTarget": "Catalog"
+      },
+      {
+        "Path": "Services\\Discount\\Discount\\Discount.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "Services\\Ordering\\Ordering.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

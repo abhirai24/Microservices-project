@@ -15,6 +15,23 @@
         int Quantity
      );
 
+    public record BasketCheckoutDto(
+        string UserName,
+        decimal TotalPrice,
+        string FirstName,
+        string LastName,
+        string EmailAddress,
+        string AddressLine,
+        string State,
+        string zipcode,
+        string CardName,
+        string CardNumber,
+        string Expiration,
+        string Cvv,
+        string PayementMethod,
+        string Country
+    );
+
     public class CreateShoppingCartItemDto
     {
         public string ProductId { get; set; }

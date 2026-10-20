@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Ordering.Commands;
 using Ordering.Repositories;
+using Ordering.Mappers;
 
 namespace Ordering.Handlers
 {
@@ -18,6 +19,8 @@ namespace Ordering.Handlers
         {
             var orderEntity = request.ToEntity();
             var generatedOrder = await _orderRepository.AddAsync(orderEntity);
+            var outBoxMessage = OrderMapper.ToOutBoxMessage(generatedOrder);
+            await _orderRepository.AddOutboxMessageAsync(outBoxMessage);
             _logger.LogInformation($"Order with Id {generatedOrder.Id} successfully created.");
             return generatedOrder.Id;
         }

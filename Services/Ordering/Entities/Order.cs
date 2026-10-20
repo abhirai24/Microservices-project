@@ -1,4 +1,5 @@
-﻿namespace Ordering.Entities
+﻿
+namespace Ordering.Entities
 {
     public class Order : EntityBase
     {
@@ -15,6 +16,8 @@
         public string? CardNumber { get; set; }
         public string? Expiration { get; set; }
         public string? Cvv { get; set; }
-        public int? PaymentMethod { get; set; }
+        public string? PaymentMethod { get; set; }
+
+        public OrderStatus? OrderStatus { get; set; } = global::Ordering.Entities.OrderStatus.Pending;
     }
 }

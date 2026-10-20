@@ -40,8 +40,7 @@ namespace Ordering.Validators
                 .WithMessage("{PropertyName} must be 3 or 4 digits.");
 
             RuleFor(o => o.PaymentMethod)
-                .NotNull().WithMessage("{PropertyName} is required.")
-                .InclusiveBetween(1, 3).WithMessage("{PropertyName} must be between 1 and 3.");
+                .NotNull().WithMessage("{PropertyName} is required.");
         }
     }
 }
