@@ -29,8 +29,8 @@ builder.Services.AddMassTransit(config =>
 {
     //Mark as consumer
     config.AddConsumer<BasketOrderingConsumer>();
-    //config.AddConsumer<PaymentCompletedConsumer>();
-    //config.AddConsumer<PaymentFailedConsumer>();
+    config.AddConsumer<PaymentCompletedConsumer>();
+    config.AddConsumer<PaymentFailedConsumer>();
 
     config.UsingRabbitMq((ctx, cfg) =>
     {
@@ -40,16 +40,16 @@ builder.Services.AddMassTransit(config =>
         {
             c.ConfigureConsumer<BasketOrderingConsumer>(ctx);
         });
-        ////Payment completed Event
-        //cfg.ReceiveEndpoint(EventBusConstant.PaymentCompletedQueue, e =>
-        //{
-        //    e.ConfigureConsumer<PaymentCompletedConsumer>(ctx);
-        //});
-        ////Payment failed event
-        //cfg.ReceiveEndpoint(EventBusConstant.PaymentFailedQueue, e =>
-        //{
-        //    e.ConfigureConsumer<PaymentFailedConsumer>(ctx);
-        //});
+        //Payment completed Event
+        cfg.ReceiveEndpoint(EventBusConstants.PaymentCompletedQueue, e =>
+        {
+            e.ConfigureConsumer<PaymentCompletedConsumer>(ctx);
+        });
+        //Payment failed event
+        cfg.ReceiveEndpoint(EventBusConstants.PaymentFailedQueue, e =>
+        {
+            e.ConfigureConsumer<PaymentFailedConsumer>(ctx);
+        });
     });
 });
 

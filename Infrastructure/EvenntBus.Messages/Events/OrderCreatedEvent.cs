@@ -1,6 +1,7 @@
-﻿namespace EvenntBus.Messages.Events
+﻿
+namespace EvenntBus.Messages.Events
 {
-   public class OrderCreatedEvent : BaseIntegrationEvent
+    public class OrderCreatedEvent : BaseIntegrationEvent
     {
         public int Id { get; set; }
         public string UserName { get; set; }
