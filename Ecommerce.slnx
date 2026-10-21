@@ -6,6 +6,7 @@
     <Project Path="Basket/Basket/Basket.csproj" />
     <Project Path="Services/Catalog/Catalog.csproj" />
     <Project Path="Services/Discount/Discount/Discount.csproj" />
+    <Project Path="Services/Identity/Identity.csproj" Id="51bb50d2-d0b7-4497-a6c5-6d62845a7fdf" />
     <Project Path="Services/Ordering/Ordering.csproj" />
     <Project Path="Services/Payment/Payment.csproj" Id="7ce6b5da-1e92-431d-9b0c-7d401ff5ebef" />
   </Folder>
