@@ -2,6 +2,8 @@ using Discount.Extensions;
 using Discount.Handlers;
 using Discount.Repositories;
 using Discount.Services;
+using Serilog;
+using Common.Logging;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +17,7 @@ var assembly = new Assembly[]
 };
 
 
-
+builder.Host.UseSerilog(Logging.ConfigureLogger);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 builder.Services.AddGrpc();

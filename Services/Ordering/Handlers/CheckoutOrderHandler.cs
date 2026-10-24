@@ -19,9 +19,10 @@ namespace Ordering.Handlers
         {
             var orderEntity = request.ToEntity();
             var generatedOrder = await _orderRepository.AddAsync(orderEntity);
-            var outBoxMessage = OrderMapper.ToOutBoxMessage(generatedOrder);
-            await _orderRepository.AddOutboxMessageAsync(outBoxMessage);
-            _logger.LogInformation($"Order with Id {generatedOrder.Id} successfully created.");
+            //var outBoxMessage = OrderMapper.ToOutBoxMessage(generatedOrder);
+            var outboxMessage = OrderMapper.ToOutBoxMessage(generatedOrder, request.CorrelationId);
+            await _orderRepository.AddOutboxMessageAsync(outboxMessage);
+            _logger.LogInformation($"Order with Id: {generatedOrder.Id} successfully created with outbox message and CorrelationId: {request.CorrelationId}.");
             return generatedOrder.Id;
         }
     }
