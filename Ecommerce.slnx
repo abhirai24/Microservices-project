@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/ApiGateWay/">
+    <Project Path="ApiGateway/ApiGateway.csproj" Id="79e1fd74-086a-41fe-952d-b23b97ab7f65" />
+  </Folder>
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/EvenntBus.Messages/EvenntBus.Messages.csproj" Id="596b307b-4b14-42d8-bf29-0ec7fca190b9" />
   </Folder>

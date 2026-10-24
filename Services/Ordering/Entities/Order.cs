@@ -16,8 +16,8 @@ namespace Ordering.Entities
         public string? CardNumber { get; set; }
         public string? Expiration { get; set; }
         public string? Cvv { get; set; }
-        public int? PaymentMethod { get; set; }
+        public string? PaymentMethod { get; set; }
 
-        public OrderStatus? OrderStatus { get; set; } = OrderStatus.Pending;
+        public OrderStatus? OrderStatus { get; set; } = Entities.OrderStatus.Pending;
     }
 }
